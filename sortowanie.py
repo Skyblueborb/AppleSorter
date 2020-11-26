@@ -2,21 +2,24 @@ import shutil
 import os.path
 import glob
 import ntpath
+from configparser import ConfigParser
 
-
-dir_path = glob.glob(fr'C:/Users/tomas/Downloads/*')
+configfile = 'config.ini'
+config = ConfigParser()
+config.read(configfile, encoding='utf-8')
+username = config['account']['user']
+dir_path = glob.glob(fr'C:/Users/{username}/Downloads/*')
 documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls']
 media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd', '.ico', '.jfif', '.pptx', '.wav']
 setupFiles = ['.exe', '.msi']
 compressedFiles = ['.zip', '.rar', '.7z']
-excluded = ['.py']
-documentsLocation = 'C:/Users/tomas/Downloads/Documents/'
-mediaLocation = 'C:/Users/tomas/Downloads/Media/'
-setupFilesLocation = 'C:/Users/tomas/Downloads/SetupFiles/'
-compressedFilesLocation = 'C:/Users/tomas/Downloads/Zips/'
-elseLocation = 'C:/Users/tomas/Downloads/Else/'
-
-
+excluded = ['.py', '.ini']
+documentsLocation = fr'C:/Users/{username}/Downloads/Documents/'
+mediaLocation = fr'C:/Users/{username}/Downloads/Media/'
+setupFilesLocation = fr'C:/Users/{username}/Downloads/SetupFiles/'
+compressedFilesLocation = fr'C:/Users/{username}/Downloads/Zips/'
+elseLocation = fr'C:/Users/{username}/Downloads/Else/'
+print(elseLocation)
 class Sorting:
     def __innit__(self):
         pass
