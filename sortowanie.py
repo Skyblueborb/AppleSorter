@@ -13,12 +13,13 @@ documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls']
 media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd', '.ico', '.jfif', '.pptx', '.wav']
 setupFiles = ['.exe', '.msi']
 compressedFiles = ['.zip', '.rar', '.7z']
-excluded = ['.py', '.ini']
-documentsLocation = fr'C:/Users/{username}/Downloads/Document/'
+excluded = config['excluded']['extension']
+documentsLocation = fr'C:/Users/{username}/Downloads/Documents/'
 mediaLocation = fr'C:/Users/{username}/Downloads/Media/'
 setupFilesLocation = fr'C:/Users/{username}/Downloads/SetupFiles/'
 compressedFilesLocation = fr'C:/Users/{username}/Downloads/Zips/'
 elseLocation = fr'C:/Users/{username}/Downloads/Else/'
+
 
 class Sorting:
     def __innit__(self):
@@ -55,7 +56,6 @@ class Sorting:
                     except OSError:
                         pass
                     shutil.move(file, elseLocation)
-
 
 
 s = Sorting()
