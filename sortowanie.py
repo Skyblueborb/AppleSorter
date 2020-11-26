@@ -14,27 +14,35 @@ media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd'
 setupFiles = ['.exe', '.msi']
 compressedFiles = ['.zip', '.rar', '.7z']
 excluded = ['.py', '.ini']
-documentsLocation = fr'C:/Users/{username}/Downloads/Documents/'
+documentsLocation = fr'C:/Users/{username}/Downloads/Document/'
 mediaLocation = fr'C:/Users/{username}/Downloads/Media/'
 setupFilesLocation = fr'C:/Users/{username}/Downloads/SetupFiles/'
 compressedFilesLocation = fr'C:/Users/{username}/Downloads/Zips/'
 elseLocation = fr'C:/Users/{username}/Downloads/Else/'
-print(elseLocation)
+
 class Sorting:
     def __innit__(self):
         pass
 
     def sort(self, x, y):
-        for file in dir_path:
-            if os.path.isfile(file):
-                extension = os.path.splitext(file)[1]
-                filename = ntpath.basename(file)
-                if extension in y:
-                    try:
-                        os.remove(os.path.join(x, filename))
-                    except OSError:
-                        pass
-                    shutil.move(file, x)
+        try:
+            os.makedirs(documentsLocation)
+            os.makedirs(mediaLocation)
+            os.makedirs(setupFilesLocation)
+            os.makedirs(compressedFilesLocation)
+            os.makedirs(elseLocation)
+        except OSError:
+            pass
+            for file in dir_path:
+                if os.path.isfile(file):
+                    extension = os.path.splitext(file)[1]
+                    filename = ntpath.basename(file)
+                    if extension in y:
+                        try:
+                            os.remove(os.path.join(x, filename))
+                        except OSError:
+                            pass
+                        shutil.move(file, x)
 
     def elsesort(self):
         for file in dir_path:
