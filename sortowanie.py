@@ -44,7 +44,6 @@ class Sorting:
                         shutil.move(file, x) # Tries to move them
                     except OSError:
                         timesMoved=1
-                        for i in range(10):
                             filename = os.path.splitext(file)[0]
                             extension = os.path.splitext(file)[1]
                             normalName = f"{filename}{extension}"
