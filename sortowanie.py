@@ -3,17 +3,25 @@ import os.path
 import glob
 import ntpath
 
-dir_path = glob.glob(fr'/home/skyblueborb/Downloads/*')
-documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls']
-media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd', '.ico', '.pptx', '.wav', '.ppt']
-setupFiles = ['.exe', '.msi']
-compressedFiles = ['.zip', '.rar', '.7z']
-excluded = ['.py', '.crdownload']
-documentsLocation = fr'/home/skyblueborb/Downloads/Documents/'
-mediaLocation = fr'/home/skyblueborb/Downloads/Media/'
-setupFilesLocation = fr'/home/skyblueborb/Downloads/SetupFiles/'
-compressedFilesLocation = fr'/home/skyblueborb/Downloads/Zips/'
-elseLocation = fr'/home/skyblueborb/Downloads/Else/'
+#Specify the download folder
+downloadFolder = fr'/home/skyblueborb/Downloads/' 
+
+#Specify all the extension categories
+documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls'] 
+media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd', '.ico', '.pptx', '.wav', '.ppt'] 
+setupFiles = ['.exe', '.msi'] 
+compressedFiles = ['.zip', '.rar', '.7z'] 
+excluded = ['.py', '.crdownload'] 
+
+#Download folder
+dir_path = glob.glob(fr'{downloadFolder}*')
+
+#Specify the folder names
+documentsLocation = fr'{downloadFolder}Documents/' 
+mediaLocation = fr'{downloadFolder}Media/'
+setupFilesLocation = fr'{downloadFolder}SetupFiles/'
+compressedFilesLocation = fr'{downloadFolder}Zips/'
+elseLocation = fr'{downloadFolder}Else/'
 
 
 class Sorting:
@@ -36,12 +44,12 @@ class Sorting:
                         shutil.move(file, x) # Tries to move them
                     except OSError:
                         timesMoved=1
-                        for i in range(10): # And idk
+                        for i in range(10):
                             filename = os.path.splitext(file)[0]
                             extension = os.path.splitext(file)[1]
                             normalName = f"{filename}{extension}"
                             normalNamePlusOne = f"{filename} ({timesMoved}){extension}" 
-                            try: # TODO: find the number of times moved after move
+                            try: #TODO: find the number of times moved after move
                                 os.rename(normalName, normalNamePlusOne)
                                 shutil.move(normalNamePlusOne, x)
                                 timesMoved+=1 
