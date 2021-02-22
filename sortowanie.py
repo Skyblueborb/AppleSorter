@@ -44,16 +44,16 @@ class Sorting:
                         shutil.move(file, x) # Tries to move them
                     except OSError:
                         timesMoved=1
-                            filename = os.path.splitext(file)[0]
-                            extension = os.path.splitext(file)[1]
-                            normalName = f"{filename}{extension}"
-                            normalNamePlusOne = f"{filename} ({timesMoved}){extension}" 
-                            try: #TODO: find the number of times moved after move
-                                os.rename(normalName, normalNamePlusOne)
-                                shutil.move(normalNamePlusOne, x)
-                                timesMoved+=1 
-                            except OSError:
-                                pass 
+                        filename = os.path.splitext(file)[0]
+                        extension = os.path.splitext(file)[1]
+                        normalName = f"{filename}{extension}"
+                        normalNamePlusOne = f"{filename} ({timesMoved}){extension}" 
+                        try: #TODO: find the number of times moved after move
+                            os.rename(normalName, normalNamePlusOne)
+                            shutil.move(normalNamePlusOne, x)
+                            timesMoved+=1 
+                        except OSError:
+                            pass 
     def elsesort(self): # Sorts files depending on excluded variable
         for file in dir_path:
             if os.path.isfile(file):
