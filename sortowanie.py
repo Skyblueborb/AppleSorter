@@ -2,31 +2,26 @@ import shutil
 import os.path
 import glob
 import ntpath
-from configparser import ConfigParser
 
-configfile = 'config.ini'
-config = ConfigParser()
-config.read(configfile, encoding='utf-8')
-username = config['account']['user']
-dir_path = glob.glob(fr'C:/Users/{username}/Downloads/*')
+dir_path = glob.glob(fr'/home/skyblueborb/Downloads/*')
 documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls']
-media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd', '.ico', '.jfif', '.pptx', '.wav']
+media = ['.jpeg', '.jpg', '.svg', '.png', '.JPG', '.PNG', '.mp4', '.mp3', '.psd', '.ico', '.pptx', '.wav', '.ppt']
 setupFiles = ['.exe', '.msi']
 compressedFiles = ['.zip', '.rar', '.7z']
-excluded = config['excluded']['extension']
-documentsLocation = fr'C:/Users/{username}/Downloads/Documents/'
-mediaLocation = fr'C:/Users/{username}/Downloads/Media/'
-setupFilesLocation = fr'C:/Users/{username}/Downloads/SetupFiles/'
-compressedFilesLocation = fr'C:/Users/{username}/Downloads/Zips/'
-elseLocation = fr'C:/Users/{username}/Downloads/Else/'
+excluded = ['.py', '.crdownload']
+documentsLocation = fr'/home/skyblueborb/Downloads/Documents/'
+mediaLocation = fr'/home/skyblueborb/Downloads/Media/'
+setupFilesLocation = fr'/home/skyblueborb/Downloads/SetupFiles/'
+compressedFilesLocation = fr'/home/skyblueborb/Downloads/Zips/'
+elseLocation = fr'/home/skyblueborb/Downloads/Else/'
 
 
 class Sorting:
     def __innit__(self):
         pass
 
-    def sort(self, x, y):
-        try:
+    def sort(self, x, y): #! Only renames if there is another file in the target directory
+        try: # Tries to make dirs only applicable if first time using the program
             os.makedirs(documentsLocation)
             os.makedirs(mediaLocation)
             os.makedirs(setupFilesLocation)
@@ -34,18 +29,25 @@ class Sorting:
             os.makedirs(elseLocation)
         except OSError:
             pass
-            for file in dir_path:
-                if os.path.isfile(file):
-                    extension = os.path.splitext(file)[1]
-                    filename = ntpath.basename(file)
-                    if extension in y:
-                        try:
-                            os.remove(os.path.join(x, filename))
-                        except OSError:
-                            pass
-                        shutil.move(file, x)
-
-    def elsesort(self):
+            for file in dir_path: # Finds all files in the specified directory
+                extension = os.path.splitext(file)[1]
+                if os.path.isfile(file) and extension in y: # Filters files and filenames
+                    try:
+                        shutil.move(file, x) # Tries to move them
+                    except OSError:
+                        timesMoved=1
+                        for i in range(10): # And idk
+                            filename = os.path.splitext(file)[0]
+                            extension = os.path.splitext(file)[1]
+                            normalName = f"{filename}{extension}"
+                            normalNamePlusOne = f"{filename} ({timesMoved}){extension}" 
+                            try: # TODO: find the number of times moved after move
+                                os.rename(normalName, normalNamePlusOne)
+                                shutil.move(normalNamePlusOne, x)
+                                timesMoved+=1 
+                            except OSError:
+                                pass 
+    def elsesort(self): # Sorts files depending on excluded variable
         for file in dir_path:
             if os.path.isfile(file):
                 extension = os.path.splitext(file)[1]
