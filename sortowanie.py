@@ -29,7 +29,7 @@ class Sorting:
     def __innit__(self):
         pass
 
-    def sort(self, x, y): #! Only renames if there is another file in the target directory
+    def sort(self, x, y):
         try: # Tries to make dirs only applicable if first time using the program
             os.makedirs(documentsLocation)
             os.makedirs(mediaLocation)
@@ -44,17 +44,23 @@ class Sorting:
                     try:
                         shutil.move(file, x) # Tries to move them
                     except OSError:
-                        timesMoved=1
-                        filename = os.path.splitext(file)[0]
+                        # Gets nessecary info about the file
+                        filenameAndPath = os.path.splitext(file)[0]
                         extension = os.path.splitext(file)[1]
-                        normalName = f"{filename}{extension}"
-                        normalNamePlusOne = f"{filename} ({timesMoved}){extension}" 
-                        try: #TODO: find the number of times moved after move
-                            os.rename(normalName, normalNamePlusOne)
-                            shutil.move(normalNamePlusOne, x)
-                            timesMoved+=1 
-                        except OSError:
-                            pass 
+                        splitFilename = filenameAndPath.split("/")
+                        onlyFilename = splitFilename[-1]
+                        # Finds the index of the number to be changed
+                        indexOfCharacter = onlyFilename.index(f'(') + 1
+                        # Variables of the numbers
+                        number = onlyFilename[indexOfCharacter]
+                        numberIntPlusOne = str(int(number) + 1)
+                        # Figures out how how to rename it
+                        filenameRenamed = onlyFilename[:indexOfCharacter] + numberIntPlusOne + onlyFilename[indexOfCharacter+1:]
+                        wholePathFileRenamed = f"{downloadFolder}{filenameRenamed}{extension}"
+                        os.rename(file, wholePathFileRenamed) # Renames it
+                        shutil.move(wholePathFileRenamed, x) # Finally it move it
+                        pass
+
     def elsesort(self): # Sorts files depending on excluded variable
         for file in dir_path:
             if os.path.isfile(file):
