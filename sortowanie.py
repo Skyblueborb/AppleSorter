@@ -3,9 +3,9 @@ import os.path
 import glob
 import ntpath
 
-
 #Specify the download folder
-downloadFolder = fr'/home/skyblueborb/Downloads/' 
+userLogin = os.getlogin()
+downloadFolder = fr'/home/{userLogin}/Downloads/' 
 
 #Specify all the extension categories
 documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls'] 
