@@ -2,10 +2,23 @@ import shutil
 import os.path
 import glob
 import ntpath
+import platform
 
-#Specify the download folder
+#Specify the download folder depending on the system
+
+downloadFolder = ''
 userLogin = os.getlogin()
-downloadFolder = fr'/home/{userLogin}/Downloads/' 
+userOS = platform.system()
+
+if userOS == 'Windows':
+    downloadFolder = fr'C:/Users/{userLogin}/Downloads'
+elif userOS == 'Linux':
+    downloadFolder = fr'/home/{userLogin}/Downloads/' 
+elif userOS == 'Darwin':
+    downloadFolder = fr'/Users/{userLogin}/Downloads'
+
+
+
 
 #Specify all the extension categories
 documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls'] 
