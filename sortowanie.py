@@ -8,7 +8,6 @@ import platform
 downloadFolder = ''
 userLogin = os.getlogin()
 userOS = platform.system()
-print(userOS)
 
 if userOS == 'Windows':
     downloadFolder = fr'C:/Users/{userLogin}/Downloads//'
