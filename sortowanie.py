@@ -5,7 +5,6 @@ import ntpath
 import platform
 
 #Specify the download folder depending on the system
-
 downloadFolder = ''
 userLogin = os.getlogin()
 userOS = platform.system()
@@ -16,9 +15,6 @@ elif userOS == 'Linux':
     downloadFolder = fr'/home/{userLogin}/Downloads/' 
 elif userOS == 'Darwin':
     downloadFolder = fr'/Users/{userLogin}/Downloads'
-
-
-
 
 #Specify all the extension categories
 documents = ['.pdf', '.docx', '.doc', '.txt', '.odt', '.xlsx', '.xls'] 
