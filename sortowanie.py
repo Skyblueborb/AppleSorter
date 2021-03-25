@@ -58,16 +58,22 @@ class Sorting:
                         extension = os.path.splitext(file)[1]
                         splitFilename = filenameAndPath.split("/")
                         onlyFilename = splitFilename[-1]
-                        # Finds the index of the number to be changed
-                        indexOfCharacter = onlyFilename.index(f'(') + 1
-                        # Variables of the numbers
-                        number = onlyFilename[indexOfCharacter]
-                        numberIntPlusOne = str(int(number) + 1)
-                        # Figures out how how to rename it
-                        filenameRenamed = onlyFilename[:indexOfCharacter] + numberIntPlusOne + onlyFilename[indexOfCharacter+1:]
-                        wholePathFileRenamed = f"{downloadFolder}{filenameRenamed}{extension}"
-                        os.rename(file, wholePathFileRenamed) # Renames it
-                        shutil.move(wholePathFileRenamed, x) # Finally it move it
+                        filenamePlusOne = f'{downloadFolder}{onlyFilename} (1){extension}'
+                        try:
+                            # Finds the index of the number to be changed
+                            indexOfCharacter = onlyFilename.index(f'(') + 1
+                            # Variables of the numbers
+                            number = onlyFilename[indexOfCharacter]
+                            numberIntPlusOne = str(int(number) + 1)
+                            # Figures out how how to rename it
+                            filenameRenamed = onlyFilename[:indexOfCharacter] + numberIntPlusOne + onlyFilename[indexOfCharacter+1:]
+                            wholePathFileRenamed = f"{downloadFolder}{filenameRenamed}{extension}"
+                            os.rename(file, wholePathFileRenamed) # Renames it
+                            shutil.move(wholePathFileRenamed, x) # Finally it move it
+                        except ValueError:
+                            os.rename(file, filenamePlusOne)
+                            shutil.move(filenamePlusOne, x)
+                            pass
                         pass
 
     def elsesort(self): # Sorts files depending on excluded variable
