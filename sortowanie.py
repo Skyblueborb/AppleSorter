@@ -10,7 +10,7 @@ userLogin = os.getlogin()
 userOS = platform.system()
 
 if userOS == 'Windows':
-    downloadFolder = fr'C:/Users/{userLogin}/Downloads//'
+    downloadFolder = fr'C://Users//{userLogin}//Downloads//'
 elif userOS == 'Linux':
     downloadFolder = fr'/home/{userLogin}/Downloads/' 
 elif userOS == 'Darwin':
@@ -54,10 +54,7 @@ class Sorting:
                         shutil.move(file, x) # Tries to move them
                     except OSError:
                         # Gets nessecary info about the file
-                        filenameAndPath = os.path.splitext(file)[0]
-                        extension = os.path.splitext(file)[1]
-                        splitFilename = filenameAndPath.split("/")
-                        onlyFilename = splitFilename[-1]
+                        onlyFilename = ntpath.basename(file)
                         filenamePlusOne = f'{downloadFolder}{onlyFilename} (1){extension}'
                         try:
                             # Finds the index of the number to be changed
