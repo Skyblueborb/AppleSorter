@@ -4,6 +4,7 @@ import glob
 import ntpath
 import platform
 
+
 #Specify the download folder depending on the system
 downloadFolder = ''
 userLogin = os.getlogin()
@@ -90,10 +91,10 @@ class Sorting:
                     shutil.move(file, elseLocation)
 
 
-s = Sorting()
-s.sort(setupFilesLocation, setupFiles)
-s.sort(documentsLocation, documents)
-s.sort(mediaLocation, media)
-s.sort(compressedFilesLocation, compressedFiles)
-s.elsesort()
-exit()
+if __name__ == "__main__":
+    s = Sorting()
+    s.sort(setupFilesLocation, setupFiles)
+    s.sort(documentsLocation, documents)
+    s.sort(mediaLocation, media)
+    s.sort(compressedFilesLocation, compressedFiles)
+    s.elsesort()
