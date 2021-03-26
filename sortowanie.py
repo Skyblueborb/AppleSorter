@@ -48,7 +48,8 @@ class Sorting:
                     shutil.move(file, x) # Tries to move them
                 except OSError:
                     # Gets nessecary info about the file
-                    onlyFilename = ntpath.basename(file)
+                    filenameWithExtension = os.path.basename(file)
+                    onlyFilename = os.path.splitext(filenameWithExtension)[0]
                     filenamePlusOne = f'{downloadFolder}{onlyFilename} (1){extension}'
                     try:
                         # Finds the index of the number to be changed
