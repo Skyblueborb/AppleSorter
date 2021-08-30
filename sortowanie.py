@@ -3,11 +3,11 @@ import os.path
 import glob
 import ntpath
 import platform
-
+import pwd
 
 #Specify the download folder depending on the system
 downloadFolder = ''
-userLogin = os.getlogin()
+userLogin = pwd.getpwuid(os.geteuid())[0]
 userOS = platform.system()
 
 if userOS == 'Windows':
